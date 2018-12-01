@@ -7,19 +7,14 @@
 
 #pragma once
 
-#include <Commands/Subsystem.h>
-#include "ctre/Phoenix.h"
+#include <Commands/Command.h>
 
-class ArmLeft : public frc::Subsystem {
- private:
-  // It's desirable that everything possible under private except
-  // for methods that implement subsystem capabilities
-  TalonSRX* leftArmMotor;
-
+class ArmLeftDown : public frc::Command {
  public:
-  ArmLeft();
-  void moveArmLeft(double speed);
-  double getPosition();
-  TalonSRX* getArmLeftMotor();
-  void InitDefaultCommand() override;
+  ArmLeftDown();
+  void Initialize() override;
+  void Execute() override;
+  bool IsFinished() override;
+  void End() override;
+  void Interrupted() override;
 };

@@ -17,11 +17,16 @@
 #include "Subsystems/ExampleSubsystem.h"
 #include "Subsystems/DriveTrain.h"
 
+#include "Subsystems/ArmRight.h"
+#include "Subsystems/ArmLeft.h"
+
 class Robot : public frc::TimedRobot {
  public:
   static ExampleSubsystem m_subsystem;
   static DriveTrain* m_drive;
   static OI* m_oi;
+  static ArmLeft* m_armLeft;
+  static ArmRight* m_armRight;
 
 
   void RobotInit() override;
