@@ -6,7 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 #include "Subsystems/ArmRight.h"
-#include "../RobotMap.h"
+#include "../../include/RobotMap.h"
 
 #include "ctre/Phoenix.h"
 

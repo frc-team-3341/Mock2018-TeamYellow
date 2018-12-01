@@ -5,9 +5,10 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "ArmRightUp.h"
+#include "Commands/ArmRightUp.h"
 
-#include "../Robot.h"
+#include "../../include/Robot.h"
+#include "../../include/OI.h"
 #include "WPILib.h"
 
 ArmRightUp::ArmRightUp() {

@@ -5,7 +5,11 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "ArmLeftUp.h"
+#include "Commands/ArmLeftUp.h"
+
+#include "../../include/Robot.h"
+#include "../../include/OI.h"
+#include "WPILib.h"
 
 ArmLeftUp::ArmLeftUp() {
   // Use Requires() here to declare subsystem dependencies
@@ -16,13 +20,24 @@ ArmLeftUp::ArmLeftUp() {
 void ArmLeftUp::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
-void ArmLeftUp::Execute() {}
+void ArmLeftUp::Execute() {
+  Robot::m_armLeft->moveArmLeft(-0.1);
+}
 
 // Make this return true when this Command no longer needs to run execute()
-bool ArmLeftUp::IsFinished() { return false; }
+bool ArmLeftUp::IsFinished() {
+  if(Robot::m_armLeft->getArmLeftMotor()->GetSensorCollection().IsFwdLimitSwitchClosed()){
+		Robot::m_armLeft->getArmLeftMotor()->SetSelectedSensorPosition(0, 0, 10);
+		return true;
+	}
+	else
+		return false;
+}
 
 // Called once after isFinished returns true
-void ArmLeftUp::End() {}
+void ArmLeftUp::End() {
+  Robot::m_armLeft->moveArmLeft(0);
+}
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
