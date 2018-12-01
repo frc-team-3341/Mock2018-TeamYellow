@@ -9,9 +9,9 @@
 
 #include <Commands/Command.h>
 
-class ArmLeftUp : public frc::Command {
+class ArmUp : public frc::Command {
  public:
-  ArmLeftUp();
+  ArmUp();
   void Initialize() override;
   void Execute() override;
   bool IsFinished() override;

@@ -12,8 +12,7 @@
 ExampleSubsystem Robot::m_subsystem;
 DriveTrain* Robot::m_drive;
 OI* Robot::m_oi;
-ArmLeft* Robot::m_armLeft;
-ArmRight* Robot::m_armRight;
+Arm* Robot::m_arm;
 
 void Robot::RobotInit() {
   m_chooser.AddDefault("Default Auto", &m_defaultAuto);

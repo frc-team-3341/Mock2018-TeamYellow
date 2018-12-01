@@ -5,29 +5,29 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "Commands/ArmRightDown.h"
+#include "Commands/ArmUp.h"
 
 #include "../../include/Robot.h"
 #include "../../include/OI.h"
 #include "WPILib.h"
 
-ArmRightDown::ArmRightDown() {
+ArmUp::ArmUp() {
   // Use Requires() here to declare subsystem dependencies
   // eg. Requires(Robot::chassis.get());
 }
 
 // Called just before this Command runs the first time
-void ArmRightDown::Initialize() {}
+void ArmUp::Initialize() {}
 
 // Called repeatedly when this Command is scheduled to run
-void ArmRightDown::Execute() {
-  Robot::m_armRight->moveArmRight(-0.1);
+void ArmUp::Execute() {
+  Robot::m_arm->moveArm(-0.1);
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool ArmRightDown::IsFinished() {
-  if(Robot::m_armRight->getArmRightMotor()->GetSensorCollection().IsRevLimitSwitchClosed()){
-		Robot::m_armRight->getArmRightMotor()->SetSelectedSensorPosition(0, 0, 10);
+bool ArmUp::IsFinished() {
+  if(Robot::m_arm->getArmMotor()->GetSensorCollection().IsFwdLimitSwitchClosed()){
+		Robot::m_arm->getArmMotor()->SetSelectedSensorPosition(0, 0, 10);
 		return true;
 	}
 	else
@@ -35,10 +35,10 @@ bool ArmRightDown::IsFinished() {
 }
 
 // Called once after isFinished returns true
-void ArmRightDown::End() {
-  Robot::m_armRight->moveArmRight(0);
+void ArmUp::End() {
+  Robot::m_arm->moveArm(0);
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void ArmRightDown::Interrupted() {}
+void ArmUp::Interrupted() {}

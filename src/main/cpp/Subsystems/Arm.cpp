@@ -5,27 +5,27 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "Subsystems/ArmRight.h"
+#include "Subsystems/Arm.h"
 #include "../../include/RobotMap.h"
 
 #include "ctre/Phoenix.h"
 
-ArmRight::ArmRight() : Subsystem("ExampleSubsystem"), rightArmMotor(new TalonSRX(rightArmMotorPort)) {
+Arm::Arm() : Subsystem("ExampleSubsystem"), ArmMotor(new TalonSRX(armMotorPort)) {
 }
 
-void ArmRight::moveArmRight(double speed){
-  rightArmMotor->Set(ControlMode::PercentOutput, speed);
+void Arm::moveArm(double speed){
+  ArmMotor->Set(ControlMode::PercentOutput, speed);
 };
 
-double ArmRight::getPosition(){
-  return rightArmMotor->GetSelectedSensorPosition(0);
+double Arm::getPosition(){
+  return ArmMotor->GetSelectedSensorPosition(0);
 };
 
-TalonSRX* ArmRight::getArmRightMotor(){
-  return rightArmMotor;
+TalonSRX* Arm::getArmMotor(){
+  return ArmMotor;
 };
 
-void ArmRight::InitDefaultCommand() {
+void Arm::InitDefaultCommand() {
   // Set the default command for a subsystem here.
   // SetDefaultCommand(new MySpecialCommand());
 }
