@@ -14,8 +14,7 @@ class OI {
     Joystick* leftJoy;
     Joystick* rightJoy; 
 
-    Button* ArmDownBut;
-    Button* ArmUpBut;
+    Button* moveArmBut;
 
   public:
   Joystick* getLeft();

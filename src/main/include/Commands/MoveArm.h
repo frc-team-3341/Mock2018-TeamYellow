@@ -9,9 +9,11 @@
 
 #include <Commands/Command.h>
 
-class ArmDown : public frc::Command {
+class MoveArm : public frc::Command {
+ private:
+  bool armDown;
  public:
-  ArmDown();
+  MoveArm();
   void Initialize() override;
   void Execute() override;
   bool IsFinished() override;

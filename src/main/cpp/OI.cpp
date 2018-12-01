@@ -9,14 +9,11 @@
 
 #include <WPILib.h>
 
-#include "Commands/ArmDown.h"
-#include "Commands/ArmUp.h"
+#include "Commands/MoveArm.h"
 
-OI::OI() : leftJoy(new Joystick(0)), rightJoy(new Joystick(1)), 
-ArmDownBut(new JoystickButton(rightJoy, 3)), ArmUpBut(new JoystickButton(rightJoy, 5)){
+OI::OI() : leftJoy(new Joystick(0)), rightJoy(new Joystick(1)), moveArmBut(new JoystickButton(rightJoy, 3)){
   // Process operator interface input here.
-  ArmDownBut->WhenPressed(new ArmDown());
-	ArmUpBut->WhenPressed(new ArmUp());
+  moveArmBut->WhenPressed(new MoveArm());
 }
 
 Joystick* OI::getLeft(){
