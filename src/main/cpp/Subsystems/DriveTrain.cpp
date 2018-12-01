@@ -9,7 +9,7 @@
 #include "Commands/TankDrive.h"
 #include "RobotMap.h"
 
-DriveTrain::DriveTrain() : Subsystem("DriveTrain"), left(new TalonSRX(2)), right(new TalonSRX(3)) {
+DriveTrain::DriveTrain() : Subsystem("DriveTrain"), left(new TalonSRX(0)), right(new TalonSRX(1)) {
 
 }
 
