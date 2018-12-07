@@ -15,6 +15,7 @@ class Arm : public frc::Subsystem {
   // It's desirable that everything possible under private except
   // for methods that implement subsystem capabilities
   TalonSRX* ArmMotor;
+  bool isArmDown;
 
  public:
   Arm();
@@ -22,4 +23,6 @@ class Arm : public frc::Subsystem {
   double getPosition();
   TalonSRX* getArmMotor();
   void InitDefaultCommand() override;
+  bool getArmDownStatus();
+  void switchArmDownStatus();
 };

@@ -14,6 +14,7 @@
 MoveArm::MoveArm() {
   // Use Requires() here to declare subsystem dependencies
   // eg. Requires(Robot::chassis.get());
+  armDown = Robot::m_arm->getArmDownStatus();
 }
 
 // Called just before this Command runs the first time
@@ -35,7 +36,7 @@ bool MoveArm::IsFinished() {
   if(armDown){
     if(Robot::m_arm->getArmMotor()->GetSensorCollection().IsRevLimitSwitchClosed()){
 	    //Robot::m_arm->getArmMotor()->SetSelectedSensorPosition(0, 0, 10);
-      armDown = false;
+      Robot::m_arm->switchArmDownStatus();
 		  return true;
 	  }
 	  else{
@@ -45,7 +46,7 @@ bool MoveArm::IsFinished() {
   else{
     if(Robot::m_arm->getArmMotor()->GetSensorCollection().IsFwdLimitSwitchClosed()){
 	    //Robot::m_arm->getArmMotor()->SetSelectedSensorPosition(0, 0, 10);
-      armDown = true;
+      Robot::m_arm->switchArmDownStatus();
 		  return true;
 	  }
 	  else{

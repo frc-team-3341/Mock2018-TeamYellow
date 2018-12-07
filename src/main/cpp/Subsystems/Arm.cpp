@@ -10,7 +10,7 @@
 
 #include "ctre/Phoenix.h"
 
-Arm::Arm() : Subsystem("ExampleSubsystem"), ArmMotor(new TalonSRX(armMotorPort)) {
+Arm::Arm() : Subsystem("ExampleSubsystem"), ArmMotor(new TalonSRX(armMotorPort)), isArmDown(false) {
 }
 
 void Arm::moveArm(double speed){
@@ -30,5 +30,17 @@ void Arm::InitDefaultCommand() {
   // SetDefaultCommand(new MySpecialCommand());
 }
 
+bool Arm::getArmDownStatus(){
+  return isArmDown;
+}
+
+void Arm::switchArmDownStatus(){
+  if(isArmDown){
+    isArmDown = false;
+  }
+  else{
+    isArmDown = true;
+  }
+}
 // Put methods for controlling this subsystem
 // here. Call these from Commands.
