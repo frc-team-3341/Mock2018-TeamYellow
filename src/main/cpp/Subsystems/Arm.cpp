@@ -10,19 +10,19 @@
 
 #include "ctre/Phoenix.h"
 
-Arm::Arm() : Subsystem("ExampleSubsystem"), ArmMotor(new TalonSRX(armMotorPort)), isArmDown(false) {
+Arm::Arm() : Subsystem("Arm"), armMotor(new TalonSRX(armMotorPort)), isArmDown(false) {
 }
 
 void Arm::moveArm(double speed){
-  ArmMotor->Set(ControlMode::PercentOutput, speed);
+  armMotor->Set(ControlMode::PercentOutput, speed);
 };
 
 double Arm::getPosition(){
-  return ArmMotor->GetSelectedSensorPosition(0);
+  return armMotor->GetSelectedSensorPosition(0);
 };
 
 TalonSRX* Arm::getArmMotor(){
-  return ArmMotor;
+  return armMotor;
 };
 
 void Arm::InitDefaultCommand() {

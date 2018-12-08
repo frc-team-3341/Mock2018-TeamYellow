@@ -8,21 +8,17 @@
 #pragma once
 
 #include <Commands/Subsystem.h>
-#include "ctre/Phoenix.h"
 
-class Arm : public frc::Subsystem {
+#include "WPILib.h"
+
+class BallDispenser : public frc::Subsystem {
  private:
   // It's desirable that everything possible under private except
   // for methods that implement subsystem capabilities
-  TalonSRX* armMotor;
-  bool isArmDown;
+  Servo* upperServo;
+  Servo* lowerServo;
 
  public:
-  Arm();
-  void moveArm(double speed);
-  double getPosition();
-  TalonSRX* getArmMotor();
+  BallDispenser();
   void InitDefaultCommand() override;
-  bool getArmDownStatus();
-  void switchArmDownStatus();
 };

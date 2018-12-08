@@ -5,24 +5,14 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#pragma once
+#include "BallDispenser.h"
 
-#include <Commands/Subsystem.h>
-#include "ctre/Phoenix.h"
+BallDispenser::BallDispenser() : Subsystem("BallDispenser"),  {}
 
-class Arm : public frc::Subsystem {
- private:
-  // It's desirable that everything possible under private except
-  // for methods that implement subsystem capabilities
-  TalonSRX* armMotor;
-  bool isArmDown;
+void BallDispenser::InitDefaultCommand() {
+  // Set the default command for a subsystem here.
+  // SetDefaultCommand(new MySpecialCommand());
+}
 
- public:
-  Arm();
-  void moveArm(double speed);
-  double getPosition();
-  TalonSRX* getArmMotor();
-  void InitDefaultCommand() override;
-  bool getArmDownStatus();
-  void switchArmDownStatus();
-};
+// Put methods for controlling this subsystem
+// here. Call these from Commands.
