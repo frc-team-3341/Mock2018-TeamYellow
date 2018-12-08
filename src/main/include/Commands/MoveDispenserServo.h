@@ -6,20 +6,18 @@
 /*----------------------------------------------------------------------------*/
 
 #pragma once
-#include "WPILib.h"
-#include "ctre/phoenix.h"
 
-class OI {
-  private:
-    Joystick* leftJoy;
-    Joystick* rightJoy; 
+#include <Commands/Command.h>
 
-    Button* moveArmBut;
-
-    Button* dispenseBallBut;
-
-  public:
-  Joystick* getLeft();
-  Joystick* getRight();
-  OI();
+class MoveDispenserServo : public frc::Command {
+ private:
+  bool isOpen;
+  int servo;
+ public:
+  MoveDispenserServo(int whichServo);
+  void Initialize() override;
+  void Execute() override;
+  bool IsFinished() override;
+  void End() override;
+  void Interrupted() override;
 };

@@ -10,6 +10,11 @@
 constexpr int leftMotorPort = 2;
 constexpr int rightMotorPort = 3;
 
+constexpr int armMotorPort = 4;
+
+constexpr int upperServoPort = 5;
+constexpr int lowerServoPort = 6;
+
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking

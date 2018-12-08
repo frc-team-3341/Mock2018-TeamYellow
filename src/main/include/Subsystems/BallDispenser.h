@@ -6,20 +6,30 @@
 /*----------------------------------------------------------------------------*/
 
 #pragma once
+
+#include <Commands/Subsystem.h>
+
 #include "WPILib.h"
-#include "ctre/phoenix.h"
 
-class OI {
-  private:
-    Joystick* leftJoy;
-    Joystick* rightJoy; 
+class BallDispenser : public frc::Subsystem {
+ private:
+  // It's desirable that everything possible under private except
+  // for methods that implement subsystem capabilities
+  Servo* upperServo;
+  Servo* lowerServo;
 
-    Button* moveArmBut;
+  bool isUpperOpen;
+  bool isLowerOpen;
 
-    Button* dispenseBallBut;
+ public:
+  BallDispenser();
+  bool getOpenStatus(int servo);
+  void switchOpenStatus(int servo);
 
-  public:
-  Joystick* getLeft();
-  Joystick* getRight();
-  OI();
+  void setPosition(int servo, double pos);
+
+  double getPosition(int servo);
+
+
+  void InitDefaultCommand() override;
 };

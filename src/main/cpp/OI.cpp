@@ -9,8 +9,14 @@
 
 #include <WPILib.h>
 
-OI::OI() : leftJoy(new Joystick(0)), rightJoy(new Joystick(1)){
+#include "Commands/MoveArm.h"
+#include "Commands/DispenseBall.h"
+
+
+OI::OI() : leftJoy(new Joystick(0)), rightJoy(new Joystick(1)), moveArmBut(new JoystickButton(rightJoy, 3)), dispenseBallBut(new JoystickButton(rightJoy, 1)){
   // Process operator interface input here.
+  moveArmBut->WhenPressed(new MoveArm());
+  dispenseBallBut->WhenPressed(new DispenseBall());
 }
 
 Joystick* OI::getLeft(){

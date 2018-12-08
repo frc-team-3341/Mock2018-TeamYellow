@@ -12,6 +12,8 @@
 ExampleSubsystem Robot::m_subsystem;
 DriveTrain* Robot::m_drive;
 OI* Robot::m_oi;
+Arm* Robot::m_arm;
+BallDispenser* Robot::m_ballDispenser;
 
 void Robot::RobotInit() {
   m_chooser.AddDefault("Default Auto", &m_defaultAuto);
