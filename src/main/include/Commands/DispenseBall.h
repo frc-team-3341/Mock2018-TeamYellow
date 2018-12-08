@@ -6,20 +6,10 @@
 /*----------------------------------------------------------------------------*/
 
 #pragma once
-#include "WPILib.h"
-#include "ctre/phoenix.h"
 
-class OI {
-  private:
-    Joystick* leftJoy;
-    Joystick* rightJoy; 
+#include <Commands/CommandGroup.h>
 
-    Button* moveArmBut;
-
-    Button* dispenseBallBut;
-
-  public:
-  Joystick* getLeft();
-  Joystick* getRight();
-  OI();
+class DispenseBall : public frc::CommandGroup {
+ public:
+  DispenseBall();
 };

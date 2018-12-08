@@ -15,6 +15,7 @@ MoveDispenserServo::MoveDispenserServo(int whichServo){
   servo = whichServo;
   // Use Requires() here to declare subsystem dependencies
   // eg. Requires(Robot::chassis.get());
+    Requires(Robot::m_ballDispenser);
 }
 
 // Called just before this Command runs the first time
