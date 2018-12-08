@@ -18,7 +18,22 @@ class BallDispenser : public frc::Subsystem {
   Servo* upperServo;
   Servo* lowerServo;
 
+  bool isUpperOpen;
+  bool isLowerOpen;
+
  public:
   BallDispenser();
+  bool getUpperOpenStatus();
+  void switchUpperOpenStatus();
+  bool getLowerOpenStatus();
+  void switchLowerOpenStatus();
+
+  void setUpperPosition(double pos);
+  void setLowerPosition(double pos);
+
+  double getUpperPosition();
+  double getLowerPosition();
+
+
   void InitDefaultCommand() override;
 };

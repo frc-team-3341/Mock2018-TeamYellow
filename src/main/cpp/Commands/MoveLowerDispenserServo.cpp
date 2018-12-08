@@ -5,38 +5,36 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "Commands/MoveArm.h"
+#include "MoveLowerDispenserServo.h"
 
 #include "../../include/Robot.h"
 #include "../../include/OI.h"
 #include "WPILib.h"
 
-MoveArm::MoveArm() {
+MoveLowerDispenserServo::MoveLowerDispenserServo() {
   // Use Requires() here to declare subsystem dependencies
   // eg. Requires(Robot::chassis.get());
 }
 
 // Called just before this Command runs the first time
-void MoveArm::Initialize() {
-  armDown = Robot::m_arm->getArmDownStatus();
+void MoveLowerDispenserServo::Initialize() {
+  isOpen = Robot::m_ballDispenser->getLowerOpenStatus();
 }
 
 // Called repeatedly when this Command is scheduled to run
-void MoveArm::Execute() {
-  if(armDown){
-    Robot::m_arm->moveArm(-0.1);
+void MoveLowerDispenserServo::Execute() {
+  if(isOpen){
+    Robot::m_ballDispenser->setLowerPosition(0.0);
   }
   else{
-    Robot::m_arm->moveArm(0.1);
+    Robot::m_ballDispenser->setLowerPosition(0.5);
   }
-  
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool MoveArm::IsFinished() {
-  if(armDown){
-    if(Robot::m_arm->getArmMotor()->GetSensorCollection().IsRevLimitSwitchClosed()){
-	    //Robot::m_arm->getArmMotor()->SetSelectedSensorPosition(0, 0, 10);
+bool MoveLowerDispenserServo::IsFinished() {
+  if(isOpen){
+    if(Robot::m_ballDispenser->getLowerPosition == 0){
 		  return true;
 	  }
 	  else{
@@ -44,8 +42,7 @@ bool MoveArm::IsFinished() {
     }
   }
   else{
-    if(Robot::m_arm->getArmMotor()->GetSensorCollection().IsFwdLimitSwitchClosed()){
-	    //Robot::m_arm->getArmMotor()->SetSelectedSensorPosition(0, 0, 10);    
+    if(Robot::m_ballDispenser->getLowerPosition == 0.5){
 		  return true;
 	  }
 	  else{
@@ -55,11 +52,10 @@ bool MoveArm::IsFinished() {
 }
 
 // Called once after isFinished returns true
-void MoveArm::End() {
-  Robot::m_arm->moveArm(0);
-  Robot::m_arm->switchArmDownStatus();  
+void MoveLowerDispenserServo::End() {
+  Robot::m_ballDispenser->switchLowerOpenStatus();
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void MoveArm::Interrupted() {}
+void MoveLowerDispenserServo::Interrupted() {}
