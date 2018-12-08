@@ -5,36 +5,37 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "MoveUpperDispenserServo.h"
+#include "Commands/MoveDispenserServo.h"
 
 #include "../../include/Robot.h"
 #include "../../include/OI.h"
 #include "WPILib.h"
 
-MoveUpperDispenserServo::MoveUpperDispenserServo() {
+MoveDispenserServo::MoveDispenserServo(int whichServo){
+  servo = whichServo;
   // Use Requires() here to declare subsystem dependencies
   // eg. Requires(Robot::chassis.get());
 }
 
 // Called just before this Command runs the first time
-void MoveUpperDispenserServo::Initialize() {
-  isOpen = Robot::m_ballDispenser->getUpperOpenStatus();
+void MoveDispenserServo::Initialize() {
+  isOpen = Robot::m_ballDispenser->getOpenStatus(servo);
 }
 
 // Called repeatedly when this Command is scheduled to run
-void MoveUpperDispenserServo::Execute() {
+void MoveDispenserServo::Execute() {
   if(isOpen){
-    Robot::m_ballDispenser->setUpperPosition(0.0);
+    Robot::m_ballDispenser->setPosition(servo, 0.0);
   }
   else{
-    Robot::m_ballDispenser->setUpperPosition(0.5);
+    Robot::m_ballDispenser->setPosition(servo, 0.5);
   }
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool MoveUpperDispenserServo::IsFinished() {
+bool MoveDispenserServo::IsFinished() {
   if(isOpen){
-    if(Robot::m_ballDispenser->getUpperPosition == 0){
+    if(Robot::m_ballDispenser->getPosition(servo) == 0){
 		  return true;
 	  }
 	  else{
@@ -42,7 +43,7 @@ bool MoveUpperDispenserServo::IsFinished() {
     }
   }
   else{
-    if(Robot::m_ballDispenser->getUpperPosition == 0.5){
+    if(Robot::m_ballDispenser->getPosition(servo) == 0.5){
 		  return true;
 	  }
 	  else{
@@ -52,10 +53,10 @@ bool MoveUpperDispenserServo::IsFinished() {
 }
 
 // Called once after isFinished returns true
-void MoveUpperDispenserServo::End() {
-  Robot::m_ballDispenser->switchUpperOpenStatus();
+void MoveDispenserServo::End() {
+  Robot::m_ballDispenser->switchOpenStatus(servo);
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void MoveUpperDispenserServo::Interrupted() {}
+void MoveDispenserServo::Interrupted() {}

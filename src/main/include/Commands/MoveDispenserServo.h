@@ -9,11 +9,12 @@
 
 #include <Commands/Command.h>
 
-class MoveLowerDispenserServo : public frc::Command {
+class MoveDispenserServo : public frc::Command {
  private:
   bool isOpen;
+  int servo;
  public:
-  MoveLowerDispenserServo();
+  MoveDispenserServo(int whichServo);
   void Initialize() override;
   void Execute() override;
   bool IsFinished() override;

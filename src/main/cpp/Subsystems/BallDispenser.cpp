@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "BallDispenser.h"
+#include "Subsystems/BallDispenser.h"
 #include "../../include/RobotMap.h"
 
 BallDispenser::BallDispenser() : Subsystem("BallDispenser"), upperServo(new Servo(upperServoPort)), lowerServo(new Servo(lowerServoPort)), isUpperOpen(false), isLowerOpen(false){}
@@ -15,46 +15,58 @@ void BallDispenser::InitDefaultCommand() {
   // SetDefaultCommand(new MySpecialCommand());
 }
 
-bool BallDispenser::getLowerOpenStatus() {
-  return isLowerOpen;
-}
 
-void BallDispenser::switchLowerOpenStatus() {
-  if(isLowerOpen){
-    isLowerOpen = false;
+
+/*-------------------------------
+For all "int servo" parameters:
+1 corresponds to the lower servo
+2 (or really any other number) corresponds to the upper servo
+-------------------------------*/
+
+bool BallDispenser::getOpenStatus(int servo) {
+  if(servo == 1){
+    return isLowerOpen;
   }
   else{
-    isLowerOpen = true;
+    return isUpperOpen;
   }
 }
 
-bool BallDispenser::getUpperOpenStatus() {
-  return isUpperOpen;
-}
-
-void BallDispenser::switchUpperOpenStatus() {
-  if(isUpperOpen){
-    isUpperOpen = false;
+void BallDispenser::switchOpenStatus(int servo) {
+  if(servo == 1){
+    if(isLowerOpen){
+      isLowerOpen = false;
+    }
+    else{
+      isLowerOpen = true;
+    }
   }
   else{
-    isUpperOpen = true;
+    if(isUpperOpen){
+      isUpperOpen = false;
+    }
+    else{
+      isUpperOpen = true;
+    }
   }
 }
 
-void BallDispenser::setUpperPosition(double pos){
-  upperServo->Set(pos);
+void BallDispenser::setPosition(int servo, double pos){
+  if(servo == 1){
+    lowerServo->Set(pos);
+  }
+  else{
+    upperServo->Set(pos);
+  }
 }
 
-void BallDispenser::setLowerPosition(double pos){
-  lowerServo->Set(pos);
-}
-
-double BallDispenser::getUpperPosition(){
-  upperServo->Get();
-}
-
-double BallDispenser::getLowerPosition(){
-  lowerServo->Get();
+double BallDispenser::getPosition(int servo){
+  if(servo == 1){
+    lowerServo->Get();
+  }
+  else{
+    upperServo->Get();
+  }
 }
 // Put methods for controlling this subsystem
 // here. Call these from Commands.

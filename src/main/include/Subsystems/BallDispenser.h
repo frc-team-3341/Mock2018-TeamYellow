@@ -23,16 +23,12 @@ class BallDispenser : public frc::Subsystem {
 
  public:
   BallDispenser();
-  bool getUpperOpenStatus();
-  void switchUpperOpenStatus();
-  bool getLowerOpenStatus();
-  void switchLowerOpenStatus();
+  bool getOpenStatus(int servo);
+  void switchOpenStatus(int servo);
 
-  void setUpperPosition(double pos);
-  void setLowerPosition(double pos);
+  void setPosition(int servo, double pos);
 
-  double getUpperPosition();
-  double getLowerPosition();
+  double getPosition(int servo);
 
 
   void InitDefaultCommand() override;
