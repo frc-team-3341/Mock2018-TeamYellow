@@ -5,34 +5,48 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "Commands/TankDrive.h"
-#include "Robot.h"
-#include "iostream"
-using namespace std;
+#include "Commands/AutoTurn.h"
 
-TankDrive::TankDrive() {
+AutoTurn::AutoTurn(double angleInput):
+anglePID(new WVPIDController(angleKp, angleKi, angleKd, setpoint, false)) {
+	// Use Requires() here to declare subsystem dependencies
+	// eg. Requires(Robot::chassis.get());
+	setpoint = angleInput;
+	Requires(Robot::m_drive); 
   // Use Requires() here to declare subsystem dependencies
   // eg. Requires(Robot::chassis.get());
-  Requires(Robot::m_drive);
 }
 
 // Called just before this Command runs the first time
-void TankDrive::Initialize() {}
-
+void AutoTurn::Initialize() {
+Robot::m_drive->resetEncoders();
+Robot::m_drive->gyroReset();
+anglePID->SetSetPoint(setpoint);
+}
 // Called repeatedly when this Command is scheduled to run
-void TankDrive::Execute() {
-  double leftVal = Robot::m_oi->getLeft()->GetY();
-  double rightVal = Robot::m_oi->getRight()->GetY();
-  cout << (Robot::m_drive->getRightDistance()) << endl;;
-  Robot::m_drive->tankDrive(leftVal, rightVal);
+void AutoTurn::Execute() {
+power = anglePID->Tick((Robot::m_drive->getLeftDistance() + Robot::m_drive->getRightDistance())/2);
+	if (setpoint > 0) {
+		Robot::m_drive->tankDrive(0.15 + power, -0.15 - power);
+	}
+	else {
+		Robot::m_drive->tankDrive(-0.15 - power, 0.15 + power);
+	}
+}
+// Make this return true when this Command no longer needs to run execute()
+bool AutoTurn::IsFinished() { 
+	if (fabs(anglePID->GetError()) < 1) {
+  		return true;
+	}
+	else { 
+		return false;
+	}
 }
 
-// Make this return true when this Command no longer needs to run execute()
-bool TankDrive::IsFinished() { return false; }
-
 // Called once after isFinished returns true
-void TankDrive::End() {}
-
+void AutoTurn::End() {
+	Robot::m_drive->tankDrive(0,0);
+}
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void TankDrive::Interrupted() {}
+void AutoTurn::Interrupted() {}
