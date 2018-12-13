@@ -15,20 +15,18 @@ class BallDispenser : public frc::Subsystem {
  private:
   // It's desirable that everything possible under private except
   // for methods that implement subsystem capabilities
-  Servo* upperServo;
-  Servo* lowerServo;
+  Servo* servo;
 
-  bool isUpperOpen;
-  bool isLowerOpen;
+  bool isOpen;
 
  public:
   BallDispenser();
-  bool getOpenStatus(int servo);
-  void switchOpenStatus(int servo);
+  bool getOpenStatus();
+  void switchOpenStatus();
 
-  void setPosition(int servo, double pos);
+  void setPosition(double pos);
 
-  double getPosition(int servo);
+  double getPosition();
 
 
   void InitDefaultCommand() override;

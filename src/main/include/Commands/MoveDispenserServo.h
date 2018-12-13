@@ -12,9 +12,8 @@
 class MoveDispenserServo : public frc::Command {
  private:
   bool isOpen;
-  int servo;
  public:
-  MoveDispenserServo(int whichServo);
+  MoveDispenserServo();
   void Initialize() override;
   void Execute() override;
   bool IsFinished() override;

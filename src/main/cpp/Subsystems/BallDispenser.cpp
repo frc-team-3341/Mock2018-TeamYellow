@@ -8,7 +8,7 @@
 #include "Subsystems/BallDispenser.h"
 #include "../../include/RobotMap.h"
 
-BallDispenser::BallDispenser() : Subsystem("BallDispenser"), upperServo(new Servo(upperServoPort)), lowerServo(new Servo(lowerServoPort)), isUpperOpen(false), isLowerOpen(false){}
+BallDispenser::BallDispenser() : Subsystem("BallDispenser"), servo(new Servo(lowerServoPort)), isOpen(false){}
 
 void BallDispenser::InitDefaultCommand() {
   // Set the default command for a subsystem here.
@@ -23,50 +23,25 @@ For all "int servo" parameters:
 2 (or really any other number) corresponds to the upper servo
 -------------------------------*/
 
-bool BallDispenser::getOpenStatus(int servo) {
-  if(servo == 1){
-    return isLowerOpen;
-  }
-  else{
-    return isUpperOpen;
-  }
+bool BallDispenser::getOpenStatus() {
+    return isOpen;
 }
 
-void BallDispenser::switchOpenStatus(int servo) {
-  if(servo == 1){
-    if(isLowerOpen){
-      isLowerOpen = false;
+void BallDispenser::switchOpenStatus() {
+    if(isOpen){
+      isOpen = false;
     }
     else{
-      isLowerOpen = true;
+      isOpen = true;
     }
-  }
-  else{
-    if(isUpperOpen){
-      isUpperOpen = false;
-    }
-    else{
-      isUpperOpen = true;
-    }
-  }
 }
 
-void BallDispenser::setPosition(int servo, double pos){
-  if(servo == 1){
-    lowerServo->Set(pos);
-  }
-  else{
-    upperServo->Set(pos);
-  }
+void BallDispenser::setPosition(double pos){
+    servo->Set(pos);
 }
 
-double BallDispenser::getPosition(int servo){
-  if(servo == 1){
-    lowerServo->Get();
-  }
-  else{
-    upperServo->Get();
-  }
+double BallDispenser::getPosition(){
+    servo->Get();
 }
 // Put methods for controlling this subsystem
 // here. Call these from Commands.

@@ -11,8 +11,7 @@
 #include "../../include/OI.h"
 #include "WPILib.h"
 
-MoveDispenserServo::MoveDispenserServo(int whichServo){
-  servo = whichServo;
+MoveDispenserServo::MoveDispenserServo(){
   // Use Requires() here to declare subsystem dependencies
   // eg. Requires(Robot::chassis.get());
     Requires(Robot::m_ballDispenser);
@@ -20,23 +19,23 @@ MoveDispenserServo::MoveDispenserServo(int whichServo){
 
 // Called just before this Command runs the first time
 void MoveDispenserServo::Initialize() {
-  isOpen = Robot::m_ballDispenser->getOpenStatus(servo);
+  isOpen = Robot::m_ballDispenser->getOpenStatus();
 }
 
 // Called repeatedly when this Command is scheduled to run
 void MoveDispenserServo::Execute() {
   if(isOpen){
-    Robot::m_ballDispenser->setPosition(servo, 0.0);
+    Robot::m_ballDispenser->setPosition(0.0);
   }
   else{
-    Robot::m_ballDispenser->setPosition(servo, 0.5);
+    Robot::m_ballDispenser->setPosition(0.5);
   }
 }
 
 // Make this return true when this Command no longer needs to run execute()
 bool MoveDispenserServo::IsFinished() {
   if(isOpen){
-    if(Robot::m_ballDispenser->getPosition(servo) == 0){
+    if(Robot::m_ballDispenser->getPosition() == 0){
 		  return true;
 	  }
 	  else{
@@ -44,7 +43,7 @@ bool MoveDispenserServo::IsFinished() {
     }
   }
   else{
-    if(Robot::m_ballDispenser->getPosition(servo) == 0.5){
+    if(Robot::m_ballDispenser->getPosition() == 0.5){
 		  return true;
 	  }
 	  else{
@@ -55,7 +54,7 @@ bool MoveDispenserServo::IsFinished() {
 
 // Called once after isFinished returns true
 void MoveDispenserServo::End() {
-  Robot::m_ballDispenser->switchOpenStatus(servo);
+  Robot::m_ballDispenser->switchOpenStatus();
 }
 
 // Called when another command which requires one or more of the same

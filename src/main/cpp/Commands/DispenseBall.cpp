@@ -11,14 +11,10 @@
 
 DispenseBall::DispenseBall() {
 
-  AddSequential(new MoveDispenserServo(1));
+  AddSequential(new MoveDispenserServo());
   AddSequential(new WaitCommand(1));
 
-  AddSequential(new MoveDispenserServo(1));
-  AddSequential(new MoveDispenserServo(2));
-  AddSequential(new WaitCommand(1));
-
-  AddSequential(new MoveDispenserServo(2));
+  AddSequential(new MoveDispenserServo());
 
 
   // Add Commands here:
