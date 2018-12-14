@@ -39,6 +39,8 @@ void Robot::RobotPeriodic() {}
 void Robot::DisabledInit() {
   m_drive = new DriveTrain();
   m_oi = new OI();
+  m_arm = new Arm();
+  m_ballDispenser = new BallDispenser();
 }
 
 void Robot::DisabledPeriodic() { frc::Scheduler::GetInstance()->Run(); }
