@@ -30,4 +30,9 @@ class Arm : public frc::Subsystem {
 
   bool getStoppedStatus();
   void switchStoppedStatus();
+
+  /*----------------
+  Unused commands: MoveArm
+  Unused methods: getPosition, getArmMotor, getArmDownStatus, switchArmDownStatus
+  -----------------*/
 };

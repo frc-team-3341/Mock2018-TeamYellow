@@ -11,6 +11,8 @@
 #include "../../include/OI.h"
 #include "WPILib.h"
 
+  //----------------UNUSED----------------//
+
 MoveDispenserServo::MoveDispenserServo(){
   // Use Requires() here to declare subsystem dependencies
   // eg. Requires(Robot::chassis.get());

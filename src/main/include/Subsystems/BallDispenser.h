@@ -30,4 +30,9 @@ class BallDispenser : public frc::Subsystem {
 
 
   void InitDefaultCommand();
+
+  /*------------
+  Unused Commands: DispenseBall, MoveDispenserServo
+  Unused Methods: getPosition
+  -------------*/
 };

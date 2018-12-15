@@ -13,6 +13,11 @@
 Arm::Arm() : Subsystem("Arm"), armMotor(new TalonSRX(armMotorPort)), isArmDown(false), isStopped(true) {
 }
 
+  /*----------------
+  Unused commands: MoveArm
+  Unused methods: getPosition, getArmMotor, getArmDownStatus, switchArmDownStatus
+  -----------------*/
+
 void Arm::moveArm(double speed){
   armMotor->Set(ControlMode::PercentOutput, speed);
 };

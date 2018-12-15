@@ -9,6 +9,8 @@
 
 #include <Commands/Command.h>
 
+  //----------------UNUSED----------------//
+
 class MoveDispenserServo : public frc::Command {
  private:
   bool isOpen;
