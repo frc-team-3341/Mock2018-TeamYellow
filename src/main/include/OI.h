@@ -11,7 +11,8 @@
 class OI {
   private:
     Joystick* leftJoy;
-    Joystick* rightJoy; 
+    Joystick* rightJoy;
+    Button* test; 
   public:
   Joystick* getLeft();
   Joystick* getRight();
