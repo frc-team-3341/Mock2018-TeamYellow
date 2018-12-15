@@ -10,16 +10,22 @@
 #include <WPILib.h>
 
 #include "Commands/MoveArm.h"
+#include "Commands/ManualMoveArm.h"
 #include "Commands/DispenseBall.h"
 #include "Commands/OpenCloseDispenser.h"
 
 
-OI::OI() : leftJoy(new Joystick(0)), rightJoy(new Joystick(1)), moveArmBut(new JoystickButton(rightJoy, 3)), dispenseBallBut(new JoystickButton(rightJoy, 1)), manualDispenseBallBut(new JoystickButton(leftJoy, 1)){
+OI::OI() : leftJoy(new Joystick(0)), rightJoy(new Joystick(1)), moveArmBut(new JoystickButton(rightJoy, 3)), 
+manualMoveArmButDown(new JoystickButton(leftJoy, 4)), manualMoveArmButUp(new JoystickButton(leftJoy, 6)),
+dispenseBallBut(new JoystickButton(rightJoy, 1)), manualDispenseBallBut(new JoystickButton(leftJoy, 7)){
   // Process operator interface input here.
   moveArmBut->WhenPressed(new MoveArm());
   dispenseBallBut->WhenPressed(new DispenseBall());
-  manualDispenseBallBut->WhenPressed(new OpenCloseDispenser(0.5));
+  manualDispenseBallBut->WhileHeld(new OpenCloseDispenser(0.5));
   manualDispenseBallBut->WhenReleased(new OpenCloseDispenser(0.0));
+
+  manualMoveArmButDown->WhileHeld(new ManualMoveArm(0));
+  manualMoveArmButDown->WhileHeld(new ManualMoveArm(1));
 }
 
 Joystick* OI::getLeft(){

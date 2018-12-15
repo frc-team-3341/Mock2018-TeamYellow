@@ -6,23 +6,17 @@
 /*----------------------------------------------------------------------------*/
 
 #pragma once
-#include "WPILib.h"
-#include "ctre/phoenix.h"
 
-class OI {
-  private:
-    Joystick* leftJoy;
-    Joystick* rightJoy; 
+#include <Commands/Command.h>
 
-    Button* moveArmBut;
-    Button* manualMoveArmButUp;
-    Button* manualMoveArmButDown;
-
-    Button* dispenseBallBut;
-    Button* manualDispenseBallBut;
-
-  public:
-  Joystick* getLeft();
-  Joystick* getRight();
-  OI();
+class ManualMoveArm : public frc::Command {
+ private:
+  int direction; //1 for up, anything else for down.
+ public:
+  ManualMoveArm(int upOrDown);
+  void Initialize() override;
+  void Execute() override;
+  bool IsFinished() override;
+  void End() override;
+  void Interrupted() override;
 };
