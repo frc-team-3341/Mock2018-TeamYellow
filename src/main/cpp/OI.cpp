@@ -12,7 +12,7 @@
 
 OI::OI() : leftJoy(new Joystick(0)), rightJoy(new Joystick(1)), test(new JoystickButton(rightJoy, 7)){
   // Process operator interface input here.
-  test->WhenPressed(new AutoMoveForward(10));
+  // test->WhenPressed(new AutoMoveForward(10));
 }
 
 Joystick* OI::getLeft(){

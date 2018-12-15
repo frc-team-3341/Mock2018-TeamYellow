@@ -29,6 +29,10 @@ void DriveTrain::gyroReset() {
 	gyro->Reset();
 }
 
+double DriveTrain::getAngle(){
+  return gyro->GetAngle();
+}
+
 void DriveTrain::tankDrive(double leftPow, double rightPow){
   left->Set(ControlMode::PercentOutput, -leftPow);
   right->Set(ControlMode::PercentOutput, rightPow);

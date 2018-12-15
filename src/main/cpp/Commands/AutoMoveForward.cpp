@@ -10,27 +10,50 @@
 using namespace std;
 
 AutoMoveForward::AutoMoveForward(double setpoint):
-drivingPID(new WVPIDController(distKp, distKi, distKd, target, false)) {
+drivingPIDL(new WVPIDController(distKp, distKi, distKd, targetL, false)), 
+drivingPIDR(new WVPIDController(distKp, distKi, distKd, targetR, false)) {
   Requires(Robot::m_drive);
-  target = setpoint;
+  targetL = setpoint; // + Robot::m_drive->getLeftDistance();
+  targetR = setpoint; // + Robot::m_drive->getRightDistance();
+  Robot::m_drive->gyroReset();
   // Use Requires() here to declare subsystem dependencies
   // eg. Requires(Robot::chassis.get());
 }
 
 // Called just before this Command runs the first time
 void AutoMoveForward::Initialize() {
-  Robot::m_drive->resetEncoders();
-  drivingPID->SetSetPoint(target);
+  distInitL = Robot::m_drive->getLeftDistance();
+  distInitR = Robot::m_drive->getRightDistance();
+  drivingPIDL->SetSetPoint(targetL);
+  drivingPIDR->SetSetPoint(targetR);
 }
 // Called repeatedly when this Command is scheduled to run
 void AutoMoveForward::Execute() {
-  double power = -0.5 * drivingPID->Tick((Robot::m_drive->getLeftDistance() + Robot::m_drive->getRightDistance())/2);
-  cout << "Distance: " << (Robot::m_drive->getLeftDistance() + Robot::m_drive->getRightDistance())/2 << endl;
-  Robot::m_drive->tankDrive(0.1 + power, 0.1 + power);
+  //Robot::m_drive->resetEncoders();
+  double angle = Robot::m_drive->getAngle();
+  double distL = Robot::m_drive->getLeftDistance()  - distInitL; // - (targetL - setpoint); // meassures from new zero 
+  double distR = Robot::m_drive->getRightDistance() - distInitR; // - (targetR - setpoint); // meassures from new zero
+  double powerL = -0.5 * drivingPIDL->Tick(-distL); // for some reason forward makes distance negative
+  double powerR = -0.5 * drivingPIDR->Tick(distR);
+  cout << "DistanceL: " << distL << " " << distR << endl;
+  cout << "Error: " << targetL - distL << " " << targetR - distR << endl;
+  cout << angle << endl;
+
+  if(angle < -1){
+    Robot::m_drive->tankDrive(0.17 + powerL, 0.03 + powerR);
+  }
+  else if(angle > 1){
+    Robot::m_drive->tankDrive(0.03 + powerL, 0.17 + powerR);
+  }
+  else{
+    Robot::m_drive->tankDrive(0.1 + powerL, 0.1 + powerR);
+  }
 }
 // Make this return true when this Command no longer needs to run execute()
 bool AutoMoveForward::IsFinished() { 
-  if (fabs(drivingPID->GetError()) < 1) {
+  double distL = Robot::m_drive->getLeftDistance() - distInitL; 
+  double distR = Robot::m_drive->getRightDistance() - distInitR;
+  if (fabs(distL - targetL) < 3 && fabs(distR - targetR) < 3) {
     return true;
   }
   else {
