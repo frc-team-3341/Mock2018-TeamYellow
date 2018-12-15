@@ -7,27 +7,16 @@
 
 #pragma once
 
-#include <Commands/Subsystem.h>
-#include "ctre/Phoenix.h"
+#include <Commands/Command.h>
 
-class Arm : public frc::Subsystem {
+class BallServoOpen : public frc::Command {
  private:
-  // It's desirable that everything possible under private except
-  // for methods that implement subsystem capabilities
-  TalonSRX* armMotor;
-  bool isArmDown;
-
-  bool isStopped;
-
+ // double pos;
  public:
-  Arm();
-  void moveArm(double speed);
-  double getPosition();
-  TalonSRX* getArmMotor();
-  void InitDefaultCommand() override;
-  bool getArmDownStatus();
-  void switchArmDownStatus();
-
-  bool getStoppedStatus();
-  void switchStoppedStatus();
+  BallServoOpen();
+  void Initialize() override;
+  void Execute() override;
+  bool IsFinished() override;
+  void End() override;
+  void Interrupted() override;
 };

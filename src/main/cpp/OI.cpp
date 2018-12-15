@@ -12,7 +12,9 @@
 #include "Commands/MoveArm.h"
 #include "Commands/ManualMoveArm.h"
 #include "Commands/DispenseBall.h"
-#include "Commands/OpenCloseDispenser.h"
+#include "Commands/BallServoOpen.h"
+#include "Commands/BallServoClose.h"
+#include "COmmands/ManualMoveArmStop.h"
 
 
 OI::OI() : leftJoy(new Joystick(0)), rightJoy(new Joystick(1)), moveArmBut(new JoystickButton(rightJoy, 3)), 
@@ -21,11 +23,13 @@ dispenseBallBut(new JoystickButton(rightJoy, 1)), manualDispenseBallBut(new Joys
   // Process operator interface input here.
   moveArmBut->WhenPressed(new MoveArm());
   dispenseBallBut->WhenPressed(new DispenseBall());
-  manualDispenseBallBut->WhileHeld(new OpenCloseDispenser(0.5));
-  manualDispenseBallBut->WhenReleased(new OpenCloseDispenser(0.0));
+  manualDispenseBallBut->WhenPressed(new BallServoOpen());
+  manualDispenseBallBut->WhenReleased(new BallServoClose());
 
-  manualMoveArmButDown->WhileHeld(new ManualMoveArm(0));
-  manualMoveArmButDown->WhileHeld(new ManualMoveArm(1));
+  manualMoveArmButDown->WhenPressed(new ManualMoveArm(0));
+  manualMoveArmButDown->WhenReleased(new ManualMoveArmStop());
+  manualMoveArmButUp->WhenPressed(new ManualMoveArm(1));
+  manualMoveArmButUp->WhenReleased(new ManualMoveArmStop());
 }
 
 Joystick* OI::getLeft(){

@@ -10,7 +10,7 @@
 
 #include "ctre/Phoenix.h"
 
-Arm::Arm() : Subsystem("Arm"), armMotor(new TalonSRX(armMotorPort)), isArmDown(false) {
+Arm::Arm() : Subsystem("Arm"), armMotor(new TalonSRX(armMotorPort)), isArmDown(false), isStopped(true) {
 }
 
 void Arm::moveArm(double speed){
@@ -40,6 +40,19 @@ void Arm::switchArmDownStatus(){
   }
   else{
     isArmDown = true;
+  }
+}
+
+bool Arm::getStoppedStatus(){
+  return isStopped;
+}
+
+void Arm::switchStoppedStatus(){
+  if(isStopped){
+    isArmDown = false;
+  }
+  else{
+    isStopped = true;
   }
 }
 // Put methods for controlling this subsystem

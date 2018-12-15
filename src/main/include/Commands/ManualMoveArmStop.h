@@ -9,11 +9,9 @@
 
 #include <Commands/Command.h>
 
-class OpenCloseDispenser : public frc::Command {
- private:
-  double pos;
+class ManualMoveArmStop : public frc::Command {
  public:
-  OpenCloseDispenser(double p);
+  ManualMoveArmStop();
   void Initialize() override;
   void Execute() override;
   bool IsFinished() override;

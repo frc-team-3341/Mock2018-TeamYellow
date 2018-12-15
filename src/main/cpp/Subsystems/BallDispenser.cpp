@@ -8,11 +8,16 @@
 #include "Subsystems/BallDispenser.h"
 #include "../../include/RobotMap.h"
 
+
+//#include "Commands/CloseBallServo.h"
+
 BallDispenser::BallDispenser() : Subsystem("BallDispenser"), servo(new Servo(3)), isOpen(false){}
 
 void BallDispenser::InitDefaultCommand() {
   // Set the default command for a subsystem here.
   // SetDefaultCommand(new MySpecialCommand());
+
+  //SetDefaultCommand(new CloseBallServo());
 }
 
 

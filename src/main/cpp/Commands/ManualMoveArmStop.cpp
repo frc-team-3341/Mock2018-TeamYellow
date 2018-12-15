@@ -5,38 +5,29 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "Commands/OpenCloseDispenser.h"
+#include "Commands/ManualMoveArmStop.h"
+#include "robot.h"
 
-
-#include "../../include/Robot.h"
-#include "../../include/OI.h"
-#include "WPILib.h"
-
-#include <iostream>
-using namespace std;
-
-OpenCloseDispenser::OpenCloseDispenser(double p) {
+ManualMoveArmStop::ManualMoveArmStop() {
   // Use Requires() here to declare subsystem dependencies
   // eg. Requires(Robot::chassis.get());
-  pos = p;
-  Requires(Robot::m_ballDispenser);
+  Requires(Robot::m_arm);
 }
 
 // Called just before this Command runs the first time
-void OpenCloseDispenser::Initialize() {}
-
-// Called repeatedly when this Command is scheduled to run
-void OpenCloseDispenser::Execute() {
-  Robot::m_ballDispenser->setPosition(pos);
-  std::cout << "test" << std::endl;
+void ManualMoveArmStop::Initialize() {
+  Robot::m_arm->switchStoppedStatus();
 }
 
+// Called repeatedly when this Command is scheduled to run
+void ManualMoveArmStop::Execute() {}
+
 // Make this return true when this Command no longer needs to run execute()
-bool OpenCloseDispenser::IsFinished() { return false; }
+bool ManualMoveArmStop::IsFinished() { return true; }
 
 // Called once after isFinished returns true
-void OpenCloseDispenser::End() {}
+void ManualMoveArmStop::End() {}
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void OpenCloseDispenser::Interrupted() {}
+void ManualMoveArmStop::Interrupted() {}

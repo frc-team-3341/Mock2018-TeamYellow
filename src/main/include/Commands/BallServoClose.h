@@ -7,27 +7,14 @@
 
 #pragma once
 
-#include <Commands/Subsystem.h>
+#include <Commands/Command.h>
 
-#include "WPILib.h"
-
-class BallDispenser : public frc::Subsystem {
- private:
-  // It's desirable that everything possible under private except
-  // for methods that implement subsystem capabilities
-  Servo* servo;
-
-  bool isOpen;
-
+class BallServoClose : public frc::Command {
  public:
-  BallDispenser();
-  bool getOpenStatus();
-  void switchOpenStatus();
-
-  void setPosition(double pos);
-
-  double getPosition();
-
-
-  void InitDefaultCommand();
+  BallServoClose();
+  void Initialize() override;
+  void Execute() override;
+  bool IsFinished() override;
+  void End() override;
+  void Interrupted() override;
 };

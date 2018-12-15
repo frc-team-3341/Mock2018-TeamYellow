@@ -5,43 +5,46 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "Commands/ManualMoveArm.h"
-#include "robot.h"
+#include "Commands/BallServoClose.h"
 
-ManualMoveArm::ManualMoveArm(int upOrDown) {
+#include "../../include/Robot.h"
+#include "../../include/OI.h"
+#include "WPILib.h"
+
+#include <iostream>
+using namespace std;
+
+BallServoClose::BallServoClose() {
   // Use Requires() here to declare subsystem dependencies
   // eg. Requires(Robot::chassis.get());
-  Requires(Robot::m_arm);
-  direction = upOrDown;
+  Requires(Robot::m_ballDispenser);
 }
 
 // Called just before this Command runs the first time
-void ManualMoveArm::Initialize() {
-  Robot::m_arm->switchStoppedStatus();
+void BallServoClose::Initialize() {
+    Robot::m_ballDispenser->switchOpenStatus();
+    Robot::m_ballDispenser->setPosition(0.0);
+    std::cout << "close" << std::endl;
 }
 
 // Called repeatedly when this Command is scheduled to run
-void ManualMoveArm::Execute() {
-  if(direction == 1)
-    Robot::m_arm->moveArm(-0.1);
-  else{
-    Robot::m_arm->moveArm(0.1);
-  }
+void BallServoClose::Execute() {
+
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool ManualMoveArm::IsFinished() {
-  if(Robot::m_arm->getStoppedStatus()){
+bool BallServoClose::IsFinished() {
+  if(Robot::m_ballDispenser->getOpenStatus()){
     return true;
   }
   else{
-    return false;
+    return false; 
   }
 }
 
 // Called once after isFinished returns true
-void ManualMoveArm::End() {}
+void BallServoClose::End() {}
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void ManualMoveArm::Interrupted() {}
+void BallServoClose::Interrupted() {}
