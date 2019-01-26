@@ -11,7 +11,7 @@
 #include "WPILib.h"
 #include "math.h"
 
-DriveTrain::DriveTrain() : Subsystem("DriveTrain"), left(new TalonSRX(1)), right(new TalonSRX(2)), gyro(new ADXRS450_Gyro()){
+DriveTrain::DriveTrain() : Subsystem("DriveTrain"), left(new TalonSRX(2)), right(new TalonSRX(3)), gyro(new ADXRS450_Gyro()){
   left->ConfigSelectedFeedbackSensor(FeedbackDevice::CTRE_MagEncoder_Relative,0,10);
   left->SetSelectedSensorPosition(0,0,10);
   right->ConfigSelectedFeedbackSensor(FeedbackDevice::CTRE_MagEncoder_Absolute,0,10);
@@ -37,6 +37,7 @@ void DriveTrain::tankDrive(double leftPow, double rightPow){
   left->Set(ControlMode::PercentOutput, -leftPow);
   right->Set(ControlMode::PercentOutput, rightPow);
 }
+
 void DriveTrain::resetEncoders() {
   left->SetSelectedSensorPosition(0,0,10);
   right->SetSelectedSensorPosition(0,0,10);

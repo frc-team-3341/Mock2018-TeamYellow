@@ -10,10 +10,12 @@
 #include <SmartDashboard/SmartDashboard.h>
 #include "Commands/AutoMoveForward.h"
 #include "Commands/AutoTurn.h"
+#include "Commands/AutoNoCV.h"
 
 ExampleSubsystem Robot::m_subsystem;
 DriveTrain* Robot::m_drive;
 OI* Robot::m_oi;
+Arm* Robot::m_arm;
 
 void Robot::RobotInit() {
   m_chooser.AddDefault("Default Auto", &m_defaultAuto);
@@ -38,6 +40,7 @@ void Robot::RobotPeriodic() {}
  */
 void Robot::DisabledInit() {
   m_drive = new DriveTrain();
+  m_arm = new Arm();
   m_oi = new OI();
 }
 
@@ -66,7 +69,7 @@ void Robot::AutonomousInit() {
 
 
   m_autonomousCommand = m_chooser.GetSelected();
-  m_autonomousCommand = new AutoTurn(90);
+  m_autonomousCommand = nullptr;
 
   if (m_autonomousCommand != nullptr) {
     m_autonomousCommand->Start();

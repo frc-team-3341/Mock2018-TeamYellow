@@ -6,16 +6,11 @@
 /*----------------------------------------------------------------------------*/
 
 #pragma once
-#include "WPILib.h"
 
-class OI {
-  private:
-    Joystick* leftJoy;
-    Joystick* rightJoy;
-    Button* up;
-    Button* down;
-  public:
-  Joystick* getLeft();
-  Joystick* getRight();
-  OI();
+#include <Commands/CommandGroup.h>
+
+
+class AutoNoCV : public frc::CommandGroup {
+ public:
+  AutoNoCV(int first);
 };

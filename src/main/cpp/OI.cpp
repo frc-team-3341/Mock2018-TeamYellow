@@ -9,10 +9,15 @@
 
 #include <WPILib.h>
 #include "Commands/AutoMoveForward.h"
+#include "Commands/MoveArm.h"
 
-OI::OI() : leftJoy(new Joystick(0)), rightJoy(new Joystick(1)), test(new JoystickButton(rightJoy, 7)){
+OI::OI() : leftJoy(new Joystick(0)), rightJoy(new Joystick(1)), up(new JoystickButton(rightJoy, 4)), down(new JoystickButton(rightJoy, 3)){
   // Process operator interface input here.
-  // test->WhenPressed(new AutoMoveForward(10));
+  up->WhenPressed(new MoveArm(-0.15));
+  up->WhenReleased(new MoveArm(0));
+  down->WhenPressed(new MoveArm(0.15));
+  down->WhenReleased(new MoveArm(0));
+
 }
 
 Joystick* OI::getLeft(){

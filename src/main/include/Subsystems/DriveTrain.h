@@ -22,6 +22,7 @@ class DriveTrain : public frc::Subsystem {
  public:
   DriveTrain();
   void tankDrive(double leftPow, double rightPow);
+  //void moveArm(double armPower);
   void InitDefaultCommand() override;
   void resetEncoders();
   void gyroReset();

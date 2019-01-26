@@ -5,37 +5,35 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "Commands/TankDrive.h"
-#include "NetworkTablesInterface.h"
+#include "Commands/MoveArm.h"
 #include "Robot.h"
-#include "iostream"
-using namespace std;
 
-TankDrive::TankDrive() {
+MoveArm::MoveArm(double power) {
   // Use Requires() here to declare subsystem dependencies
   // eg. Requires(Robot::chassis.get());
-  Requires(Robot::m_drive);
+  Requires(Robot::m_arm);
+  movePower = power;
 }
 
 // Called just before this Command runs the first time
-void TankDrive::Initialize() {}
-
-// Called repeatedly when this Command is scheduled to run
-void TankDrive::Execute() {
-  double leftVal = Robot::m_oi->getLeft()->GetY();
-  double rightVal = Robot::m_oi->getRight()->GetY();
-  double leftDist = Robot::m_drive->getLeftDistance();
-  double rightDist = Robot::m_drive->getRightDistance();
-  cout << leftDist << "  " << rightDist << endl;
-  Robot::m_drive->tankDrive(leftVal, rightVal);
+void MoveArm::Initialize() {
+  Robot::m_arm->switchArmStoppedStatus();
 }
 
+// Called repeatedly when this Command is scheduled to run
+void MoveArm::Execute() {
+  Robot::m_arm->moveArm(movePower);
+}
 // Make this return true when this Command no longer needs to run execute()
-bool TankDrive::IsFinished() { return false; }
+bool MoveArm::IsFinished() { 
+  return Robot::m_arm->getArmStoppedStatus(); }
 
 // Called once after isFinished returns true
-void TankDrive::End() {}
+void MoveArm::End() {
+    Robot::m_arm->switchArmStoppedStatus();
+}
+
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void TankDrive::Interrupted() {}
+void MoveArm::Interrupted() {}

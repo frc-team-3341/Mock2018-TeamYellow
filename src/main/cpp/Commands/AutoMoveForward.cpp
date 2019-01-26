@@ -39,14 +39,14 @@ void AutoMoveForward::Execute() {
   cout << "Error: " << targetL - distL << " " << targetR - distR << endl;
   cout << angle << endl;
 
-  if(angle < -1){
-    Robot::m_drive->tankDrive(0.17 + powerL, 0.03 + powerR);
+  if(angle > -1){
+    Robot::m_drive->tankDrive(0.3 + powerL, 0.1 + powerR);
   }
-  else if(angle > 1){
-    Robot::m_drive->tankDrive(0.03 + powerL, 0.17 + powerR);
+  else if(angle < 1){
+    Robot::m_drive->tankDrive(0.1 + powerL, 0.3 + powerR);
   }
   else{
-    Robot::m_drive->tankDrive(0.1 + powerL, 0.1 + powerR);
+    Robot::m_drive->tankDrive(0.2 + powerL, 0.2 + powerR);
   }
 }
 // Make this return true when this Command no longer needs to run execute()

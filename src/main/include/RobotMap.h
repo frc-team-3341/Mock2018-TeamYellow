@@ -6,10 +6,13 @@
 /*----------------------------------------------------------------------------*/
 
 #pragma once
+#include <cmath>
 
 constexpr int leftMotorPort = 2;
 constexpr int rightMotorPort = 3;
-
+constexpr double robotLength = 16.25;
+constexpr double robotWidth = 12;
+constexpr double robotDiagnal = pow(pow(robotLength, 2) + pow(robotWidth, 2), 0.5);
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking

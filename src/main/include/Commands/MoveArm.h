@@ -6,16 +6,17 @@
 /*----------------------------------------------------------------------------*/
 
 #pragma once
-#include "WPILib.h"
 
-class OI {
-  private:
-    Joystick* leftJoy;
-    Joystick* rightJoy;
-    Button* up;
-    Button* down;
-  public:
-  Joystick* getLeft();
-  Joystick* getRight();
-  OI();
+#include <Commands/Command.h>
+
+class MoveArm : public frc::Command {
+ private:
+  double movePower;
+ public:
+  MoveArm(double power);
+  void Initialize() override;
+  void Execute() override;
+  bool IsFinished() override;
+  void End() override;
+  void Interrupted() override;
 };
