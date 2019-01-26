@@ -27,7 +27,7 @@ void TankDrive::Execute() {
   double leftDist = Robot::m_drive->getLeftDistance();
   double rightDist = Robot::m_drive->getRightDistance();
   cout << leftDist << "  " << rightDist << endl;
-  Robot::m_drive->tankDrive(leftVal, rightVal);
+  Robot::m_drive->tankDrive(leftVal*0.5, rightVal*0.5);
 }
 
 // Make this return true when this Command no longer needs to run execute()
