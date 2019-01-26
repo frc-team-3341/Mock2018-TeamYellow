@@ -25,7 +25,7 @@ void MoveArm::Initialize() {
 // Called repeatedly when this Command is scheduled to run
 void MoveArm::Execute() {
   cout << Robot::m_arm->getArmPos() << endl;
-  Robot::m_arm->moveArm(movePower);
+  Robot::m_arm->moveArm(movePower*0.3);
 }
 // Make this return true when this Command no longer needs to run execute()
 bool MoveArm::IsFinished() { 

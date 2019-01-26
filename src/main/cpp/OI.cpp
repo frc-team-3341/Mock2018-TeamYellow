@@ -11,7 +11,7 @@
 #include "Commands/AutoMoveForward.h"
 #include "Commands/MoveArm.h"
 
-OI::OI() : leftJoy(new Joystick(0)), rightJoy(new Joystick(1)), up(new JoystickButton(rightJoy, 4)), down(new JoystickButton(rightJoy, 3)){
+OI::OI() : leftJoy(new Joystick(0)), rightJoy(new Joystick(1)), up(new JoystickButton(rightJoy, 1)), down(new JoystickButton(leftJoy, 1)){
   // Process operator interface input here.
   up->WhenPressed(new MoveArm(-0.15));
   up->WhenReleased(new MoveArm(0));
