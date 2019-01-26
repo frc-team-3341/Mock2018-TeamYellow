@@ -35,9 +35,9 @@ void AutoMoveForward::Execute() {
   double distR = Robot::m_drive->getRightDistance() - distInitR; // - (targetR - setpoint); // meassures from new zero
   double powerL = -0.5 * drivingPIDL->Tick(-distL); // for some reason forward makes distance negative
   double powerR = -0.5 * drivingPIDR->Tick(distR);
-  cout << "DistanceL: " << distL << " " << distR << endl;
-  cout << "Error: " << targetL - distL << " " << targetR - distR << endl;
-  cout << angle << endl;
+  //cout << "DistanceL: " << distL << " " << distR << endl;
+  //cout << "Error: " << targetL - distL << " " << targetR - distR << endl;
+  //cout << angle << endl;
 
   if(angle > -1){
     Robot::m_drive->tankDrive(0.3 + powerL, 0.1 + powerR);

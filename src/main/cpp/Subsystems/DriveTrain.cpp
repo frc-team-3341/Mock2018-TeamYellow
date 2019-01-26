@@ -45,12 +45,12 @@ void DriveTrain::resetEncoders() {
 
 double DriveTrain::getLeftDistance() {
   double relativePosition = left->GetSensorCollection().GetQuadraturePosition();
-  return relativePosition*6*M_PI /4096; //6pi is the circumferece (needs to be double checked) and 4096 is ticks per rev
+  return relativePosition*6*3.14159265359 /4096; //6pi is the circumferece (needs to be double checked) and 4096 is ticks per rev
 }
 
 double DriveTrain::getRightDistance() {
   double relativePosition = (right->GetSensorCollection().GetQuadraturePosition());
-  return relativePosition*6*M_PI /4096; //6pi is the circumferece (needs to be double checked) and 4096 is ticks per rev
+  return relativePosition*6*3.14159265359/4096; //6pi is the circumferece (needs to be double checked) and 4096 is ticks per rev
 } 
 // Put methods for controlling this subsystem
 // here. Call these from Commands.

@@ -7,6 +7,8 @@
 
 #include "Commands/MoveArm.h"
 #include "Robot.h"
+#include "iostream"
+using namespace std;
 
 MoveArm::MoveArm(double power) {
   // Use Requires() here to declare subsystem dependencies
@@ -22,6 +24,7 @@ void MoveArm::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void MoveArm::Execute() {
+  cout << Robot::m_arm->getArmPos() << endl;
   Robot::m_arm->moveArm(movePower);
 }
 // Make this return true when this Command no longer needs to run execute()

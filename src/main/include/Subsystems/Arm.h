@@ -24,4 +24,5 @@ class Arm : public frc::Subsystem {
   void InitDefaultCommand() override;
   bool getArmStoppedStatus();
   void switchArmStoppedStatus();
+  double getArmPos();
 };

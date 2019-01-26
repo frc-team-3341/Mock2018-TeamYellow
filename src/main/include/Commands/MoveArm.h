@@ -12,6 +12,7 @@
 class MoveArm : public frc::Command {
  private:
   double movePower;
+  double position;
  public:
   MoveArm(double power);
   void Initialize() override;
